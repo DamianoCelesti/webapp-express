@@ -12,13 +12,19 @@ const moviesRouter = require('./routers/movies');
 // importo il middleware delle gestione errori server
 const errorsHandler = require('./middlewares/errorsHandler');
 // importo il middleware notfound 404
-const notFound = require('./middlewares/notFound')
+const notFound = require('./middlewares/notFound');
+// importo il middleware imgPath
+const imgPath = require('./middlewares/imagePath');
 
 
 // middleware per abilitare il parsing del JSON
 app.use(express.json());
 
+// imgs statiche
+app.use(express.static('public'));
 
+// utilizzo middleware delle immagini
+app.use(imgPath);
 
 
 // definisco route per la homepage
@@ -28,6 +34,8 @@ app.get('/', (req, res) => { // parametri della funzione request(richiesta del c
 
 // utilizziamo la rotta dei movies andando a definire la parte iniziale delle rotte
 app.use("/movies", moviesRouter)
+
+
 
 // utilizzo gestione errori server alla fine dopo le route
 
