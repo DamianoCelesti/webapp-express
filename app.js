@@ -4,6 +4,8 @@ const express = require('express')
 const app = express()
 // porta del server importando da env
 const port = process.env.PORT
+// importiamo cors
+const cors = require('cors')
 
 
 
@@ -19,6 +21,9 @@ const imgPath = require('./middlewares/imagePath');
 
 // middleware per abilitare il parsing del JSON
 app.use(express.json());
+
+// middleware di cors
+app.use(cors({ origin: process.env.FE_APP }))
 
 // imgs statiche
 app.use(express.static('public'));
