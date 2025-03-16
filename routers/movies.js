@@ -13,8 +13,6 @@ const movieController = require('../controllers/movieController');
 // index
 router.get('/', movieController.index);
 
-
-
 // show
 router.get('/:id', movieController.show);
 
@@ -29,5 +27,8 @@ router.patch('/:id', function (req, res) {
 });
 // destroy
 router.delete('/:id', movieController.destroy);
+
+// store review
+router.post('/:id/reviews', movieController.storeReview);
 
 module.exports = router;
