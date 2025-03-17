@@ -54,7 +54,29 @@ function show(req, res) {
 
 
 // store
-function store(req, res) {
+function store(req, res, next) {
+
+    const { title, director, abstract } = req.body;
+
+    const imageName = `${req.file.filename}`;
+
+    // creiamo la query
+    const query = "INSERT INTO movies (title, director, image, abstract) VALUES (?,?,?,?)";
+
+    // esegue query per mettere nel db
+    connection.query(query,
+        [title, director, imageName, abstract],
+        (err, result) => {
+            if (err) {
+                console.log(err)
+                return next(new Error("errore del server"));
+            }
+            res.status(201).json({
+                status: "successo",
+                message: "Movie creato con successo"
+            });
+        }
+    )
 
 }
 
